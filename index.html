@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+    text-align: center;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Sections */
+.section {
+    display: none;
+    padding: 60px 20px;
+}
+.active {
+    display: block;
+}
+
+/* 💎 Aesthetic Button */
+.btn {
+    padding: 14px 35px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-top: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(255, 75, 92, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Images */
+img {
+    width: 260px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* Message */
+.message-box {
+    background: white;
+    color: #333;
+    padding: 25px;
+    width: 75%;
+    margin: auto;
+    border-radius: 20px;
+}
+
+/* 💕 Floating Hearts */
+.heart-bg {
+    position: fixed;
+    color: rgba(255, 0, 0, 0.5);
+    font-size: 20px;
+    animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* ❤️ Click Heart */
+.heart {
+    position: fixed;
+    color: red;
+    font-size: 20px;
+    animation: pop 1s linear forwards;
+}
+
+@keyframes pop {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: translateY(-100px) scale(1.5); }
+}
+
+/* 💥 Burst Hearts */
+@keyframes burst {
+    0% { transform: translate(0,0); opacity:1; }
+    100% { transform: translate(var(--x), var(--y)); opacity:0; }
+}
+
+/* 💕 Name Glow */
+.name {
+    font-size: 2.5em;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #fff; }
+    to { text-shadow: 0 0 20px #ff4b5c; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎁 START -->
+<div id="start" class="section active">
+    <h1 class="name">Happy Birthday ❤️</h1>
+    <h2>Maniiiii 💖</h2>
+    <p>I have something special for you ✨</p>
+    <button class="btn" onclick="goToMemories()">Start Surprise 🎁</button>
+</div>
+
+<!-- 📸 MEMORIES -->
+<div id="memories" class="section">
+    <h2>✨ Our Memories ✨</h2>
+    <img id="memoryImg" src="img1.jpeg">
+    <br>
+    <button class="btn" onclick="burstHearts(); nextImage()">Next 💕</button>
+</div>
+
+<!-- 💌 MESSAGE -->
+<div id="message" class="section">
+    <h2>💖 A Special Message 💖</h2>
+    <div class="message-box">
+        <p id="typing"></p>
+    </div>
+</div>
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// Start → Memories
+function goToMemories() {
+    document.getElementById("start").classList.remove("active");
+    document.getElementById("memories").classList.add("active");
+    document.getElementById("music").play();
+}
+
+// Images
+let images = ["img1.jpeg","img2.jpeg","img3.jpeg","img4.jpeg","img5.jpeg","img6.jpeg","img7.jpeg","img8.jpeg","img9.jpeg","img10.jpeg"];
+let index = 0;
+
+function nextImage() {
+    createHeart();
+    index++;
+    if (index < images.length) {
+        document.getElementById("memoryImg").src = images[index];
+    } else {
+        goToMessage();
+    }
+}
+
+// Memories → Message
+function goToMessage() {
+    document.getElementById("memories").classList.remove("active");
+    document.getElementById("message").classList.add("active");
+    typeMessage();
+}
+
+// 💌 Typing Message
+ const text = `Happy Birthday Nannaaaa ❤️
+
+To my love, to my boyfriend,to my speacial one, to my husband, to my everything... 💖
+
+You mean so much to me. When I’m with you, I don’t care about the world at all...I love youuu love youuuuuu loveee youuuuu sooo muchhhhhh....
+Even if so many people give me love, I always want yours… and I’m lucky that I have youuuu 💕
+
+You asked me many times — why do I like you? why do I love you? why did I fall for you?  
+I think I finally found the answer… it’s because of who you are
+
+You don’t pretend, you’re real… and that’s what makes you so special to me..  
+Every little thing you do, every small action — I admire everything that you do..And you know what u became minee hahaha "YOU’RE MINE"
+You know how happy I feel when I say this...Once upon a time I just thought how would it be if ur mine but I never thought that
+ it will become true and it is trueeee even if world come back of you I wouldn’t let them to be back of youu haaa
+ Yes i am selfish, I am possessive when it comes to youu I don’t think so u have a problem in that....And don’t think these r all sollu becoz
+  they r not sollu it comes from very very bottom of my heart.....You know whr is my heart????
+I fell for you so muchhhh… and I keep falling for you more and more every single day 💖
+Love you lots and lots Nannaaaa 😘😘😘😘😘😘❤️`;
+
+let i = 0;
+function typeMessage() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeMessage, 40);
+    }
+}
+
+// ❤️ Small Heart
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.classList.add("heart");
+    heart.style.left = Math.random()*window.innerWidth+"px";
+    heart.style.top = Math.random()*window.innerHeight+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
+}
+
+// 💥 Burst Hearts
+function burstHearts() {
+    for (let i=0;i<6;i++) {
+        const heart=document.createElement("div");
+        heart.innerHTML="💖";
+        heart.style.position="fixed";
+        heart.style.left="50%";
+        heart.style.top="70%";
+        heart.style.animation="burst 1s ease-out forwards";
+
+        const x=(Math.random()-0.5)*200;
+        const y=(Math.random()-0.5)*200;
+        heart.style.setProperty("--x",x+"px");
+        heart.style.setProperty("--y",y+"px");
+
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),1000);
+    }
+}
+
+// 💕 Background Hearts
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.innerHTML="❤️";
+    heart.classList.add("heart-bg");
+    heart.style.left=Math.random()*window.innerWidth+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+},500);
+</script>
+
+</body>
+</html>
